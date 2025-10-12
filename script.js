@@ -4,6 +4,6 @@
     const rollback = 15;
     const fullPrice = 1247532;
     const adaptive = true;
-alert(`Привет, друг ${userName}!`);
+alert(`Привет, друг!`);
 
 console.log('Приветствую гостя сайта!')
