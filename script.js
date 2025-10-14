@@ -18,3 +18,7 @@ const array = lower.split(", ");
 console.log(array);
 
 console.log (fullPrice * (rollback/100));
+
+
+const title = prompt(“Как называется ваш проект?”);
+console.log(title);
