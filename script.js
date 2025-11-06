@@ -2,21 +2,17 @@ let title = prompt("Как называется ваш проект?");
 const screens = prompt("Какие типы экранов нужно разработать?");
 const screenPrice = +prompt("Сколько будет стоить данная работа?");
 const adaptive = prompt("Нужен ли адаптив на сайте?");
-const service1 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice1 = +prompt("Сколько это будет стоить?");
-const service2 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice2 = +prompt("Сколько это будет стоить?");
 const rollbackPercent = 15;
 
 const getAllServicePrices = function(servicePrice1,servicePrice2){
     return servicePrice1 + servicePrice2;};
-const allServicePrices = getAllServicePrices(servicePrice1,servicePrice2);
+allServicePrices = getAllServicePrices(servicePrice1,servicePrice2);
 
 
 
 function getFullPrice(screenPrice, allServicePrices){
     return screenPrice + allServicePrices;}
-const fullPrice = getFullPrice(screenPrice, allServicePrices);
+fullPrice = getFullPrice(screenPrice, allServicePrices);
 
 
 const getTitle = function(title){
@@ -30,7 +26,7 @@ const getTitle = function(title){
 const getServicePercentPrices = function (fullPrice, rollbackPercent){
     const rollbackSum = fullPrice * (rollbackPercent/100);
     return Math.round(fullPrice - rollbackSum)};
-const servicePercentPrice = getServicePercentPrices(fullPrice, rollbackPercent);
+servicePercentPrice = getServicePercentPrices(fullPrice, rollbackPercent);
 
 
 
