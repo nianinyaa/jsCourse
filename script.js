@@ -1,39 +1,72 @@
-let title = prompt("Как называется ваш проект?");
-const screens = prompt("Какие типы экранов нужно разработать?");
-const screenPrice = +prompt("Сколько будет стоить данная работа?");
-const adaptive = prompt("Нужен ли адаптив на сайте?");
-const service1 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice1 = +prompt("Сколько это будет стоить?");
-const service2 = prompt("Какой дополнительный тип услуги нужен?");
-const servicePrice2 = +prompt("Сколько это будет стоить?");
-const rollbackPercent = 15;
+let title;
+let screens;
+let screenPrice;
+let adaptive;
 
-const getAllServicePrices = function(servicePrice1,servicePrice2){
-    return servicePrice1 + servicePrice2;};
-const allServicePrices = getAllServicePrices(servicePrice1,servicePrice2);
+let service1;
+let service2;
+let rollbackPercent = 15;
+let allServicePrices;
+let fullPrice;
+let servicePercentPrice;
 
+const isNumber = function(num){
+    return !isNaN(parseFloat(num)) && isFinite(num) // !!очень универсальная проверка на число
+}
+
+
+const asking = function (){
+    title = prompt("Как называется ваш проект?", "Калькулятор верстки");
+    screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные");
+
+    // screenPrice = prompt("Сколько будет стоить данная работа?");
+    // while(!isNumber(screenPrice)){
+    //     screenPrice = prompt("Сколько будет стоить данная работа?");
+    // }
+
+     do{
+        screenPrice = prompt("Сколько будет стоить данная работа?");
+     }
+     while(!screenPrice || !isNumber(screenPrice))
+
+    screenPrice = parseFloat(screenPrice);
+    adaptive = prompt("Нужен ли адаптив на сайте?");
+}
+const getAllServicePrices = function(){
+    let sum = 0;
+    for (let i = 0; i < 2; i++) {
+        if (i === 0) {
+            service1 = prompt("Какой дополнительный тип услуги нужен?")
+        }else if (i === 1){
+            service2 = prompt("Какой дополнительный тип услуги нужен?")
+        }
+
+    let price;
+    do{
+       price = prompt("Сколько это будет стоить?")
+    } while (!isNumber(price));
+
+        sum += parseFloat(price);
+       }
+       return sum
+    };
 
 
 function getFullPrice(screenPrice, allServicePrices){
-    return screenPrice + allServicePrices;}
-const fullPrice = getFullPrice(screenPrice, allServicePrices);
-
+    return (screenPrice) + allServicePrices;
+}
 
 const getTitle = function(title){
     if (!title) return "";
     const trimmedTitle = title.trim();
     return trimmedTitle.charAt(0).toUpperCase() + trimmedTitle.slice(1).toLowerCase();
 } 
- title = getTitle(title);
+
 
 
 const getServicePercentPrices = function (fullPrice, rollbackPercent){
     const rollbackSum = fullPrice * (rollbackPercent/100);
     return Math.round(fullPrice - rollbackSum)};
-const servicePercentPrice = getServicePercentPrices(fullPrice, rollbackPercent);
-
-
-
 
  function getRollbackMessage(fullPrice){
 
@@ -60,12 +93,22 @@ else{
 
 
 
+asking();
+allServicePrices = getAllServicePrices();
+fullPrice = getFullPrice((screenPrice), allServicePrices);
+servicePercentPrice = getServicePercentPrices(fullPrice, rollbackPercent);
+title = getTitle(title);
+
+
+
 showTypeOf(title);
-showTypeOf(fullPrice);
+showTypeOf(screenPrice);
 showTypeOf(adaptive);
 
+console.log("allServicePrices", allServicePrices);
+
 console.log("Типы экранов для разработки:", screens);
-
 getRollbackMessage(fullPrice);
+console.log(typeof title);
 
-console.log("Стоимость за вычетом отката:", servicePercentPrice);
+//console.log("Стоимость за вычетом отката:", servicePercentPrice)
